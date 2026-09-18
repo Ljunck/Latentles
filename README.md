@@ -252,7 +252,7 @@ If `requirements.txt` has not yet been generated, install the required packages 
 pip install flask numpy pillow scikit-learn matplotlib
 ```
 
-### Requirements.txt
+### Requirements
    Flask |
    numpy |
    Pillow |
