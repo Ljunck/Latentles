@@ -7,7 +7,7 @@ from sklearn.decomposition import PCA
 IMAGE_SIZE = (64, 64)
 
 # Use our expanded dataset
-IMAGE_FOLDER = "data/augmented"
+IMAGE_FOLDER = "data/images"
 OUTPUT_FOLDER = "data/embeddings"
 
 # Keep more information than before

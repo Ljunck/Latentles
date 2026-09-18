@@ -4,17 +4,27 @@ import os
 import uuid
 
 from processor import encode_new_image, decode_embedding
-
+from encoder import create_embeddings
 
 app = Flask(__name__)
 
 UPLOAD_FOLDER = "uploads"
 OUTPUT_FOLDER = "data/output"
+EMBEDDING_FOLDER = "data/embeddings"
 
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 os.makedirs(OUTPUT_FOLDER, exist_ok=True)
+os.makedirs(EMBEDDING_FOLDER, exist_ok=True)
 
 app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
+
+
+# Automatically train PCA if the saved PCA files do not exist
+if not os.path.exists(os.path.join(EMBEDDING_FOLDER, "mean.npy")):
+    print("PCA model not found.")
+    print("Training PCA using images in data/images...")
+    create_embeddings()
+    print("PCA training complete.")
 
 
 @app.route("/")
@@ -78,6 +88,7 @@ def process_image():
         component=component,
         strength=strength
     )
+
 
 @app.route("/uploads/<filename>")
 def uploaded_file(filename):
