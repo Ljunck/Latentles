@@ -253,10 +253,10 @@ pip install flask numpy pillow scikit-learn matplotlib
 ```
 
 ### Requirements.txt
-   Flask
-   numpy
-   Pillow
-   scikit-learn
+   Flask |
+   numpy |
+   Pillow |
+   scikit-learn |
    matplotlib
    
 
