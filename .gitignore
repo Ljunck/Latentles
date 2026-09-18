@@ -1,0 +1,10 @@
+﻿venv/
+__pycache__/
+*.pyc
+
+uploads/*
+data/augmented/*
+data/embeddings/*
+data/output/*
+
+!.gitkeep

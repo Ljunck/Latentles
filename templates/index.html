@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>LatentLens</title>
+
+    <style>
+
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 20px;
+            background: #f4f4f4;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        .panel {
+            background: white;
+            padding: 25px;
+            margin-top: 20px;
+            border-radius: 10px;
+        }
+
+        input,
+        button {
+            margin-top: 10px;
+            padding: 10px;
+        }
+
+        button {
+            cursor: pointer;
+        }
+
+        .images {
+            display: flex;
+            gap: 30px;
+            margin-top: 20px;
+        }
+
+        .image-box {
+            flex: 1;
+        }
+
+        img {
+            width: 100%;
+            max-width: 400px;
+            image-rendering: auto;
+        }
+
+        .embedding {
+            background: #eee;
+            padding: 10px;
+            overflow-x: auto;
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+    <h1>LatentLens</h1>
+
+    <p style="text-align:center;">
+        Image Embedding & Latent Space Manipulation
+    </p>
+
+
+    <div class="panel">
+
+        <h2>Upload Image</h2>
+
+        <form action="/process" method="POST"
+              enctype="multipart/form-data">
+
+            <input
+                type="file"
+                name="image"
+                accept="image/*"
+                required
+            >
+
+            <br>
+
+            <label>
+                PCA Component:
+            </label>
+
+            <input
+                type="number"
+                name="component"
+                value="0"
+                min="0"
+                max="29"
+            >
+
+            <br>
+
+            <label>
+                Modification Strength:
+            </label>
+
+            <input
+                type="number"
+                name="strength"
+                value="3"
+                step="0.5"
+            >
+
+            <br>
+
+            <button type="submit">
+                Analyze & Modify
+            </button>
+
+        </form>
+
+    </div>
+
+
+    {% if original_image %}
+
+    <div class="panel">
+
+        <h2>Result</h2>
+
+        <div class="images">
+
+            <div class="image-box">
+
+                <h3>Original</h3>
+
+                <img src="{{ original_image }}">
+
+            </div>
+
+
+            <div class="image-box">
+
+                <h3>Reconstructed / Modified</h3>
+
+                <img src="{{ result_image }}">
+
+            </div>
+
+        </div>
+
+
+        <h3>Embedding</h3>
+
+        <div class="embedding">
+
+            {{ embedding }}
+
+        </div>
+
+
+        <p>
+            Modified Component:
+            <strong>{{ component }}</strong>
+        </p>
+
+        <p>
+            Modification Strength:
+            <strong>{{ strength }}</strong>
+        </p>
+
+    </div>
+
+    {% endif %}
+
+
+</body>
+
+</html>
